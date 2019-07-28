@@ -5,7 +5,7 @@ def display_board(board):
 
 
 def new_game():
-
+    global board
     board = ["_" for i in range(10)]
     display_board(board)
     player1_sign = input("Hello Player1 which Sign do you want to play X or O?")
@@ -58,17 +58,23 @@ def check_for_win(player_sign):
 
     if WON:
         print(f"congrats you won the game! {player_sign}")
-        exit(code=None)
+        answer = input("do you wanna play again Y/N?")
+        if answer == 'Y':
+            new_game()
+        else:
+            exit(code=None)
 
 
-curr_turn = "player1"
-playing = True
+def main():
+    global board
+    curr_turn = "player1"
+    playing = True
+    player1_sign, player2_sign, board = new_game()
+    print(f'Ok so player1 your sign is {player1_sign}  player 2 your sign is {player2_sign}')
+    while playing:
+        curr_turn = make_a_turn(player1_sign, player2_sign, curr_turn)
+        check_for_win(player1_sign)
+        check_for_win(player2_sign)
 
-player1_sign, player2_sign, board = new_game()
-print(f'Ok so player1 your sign is {player1_sign}  player 2 your sign is {player2_sign}')
 
-while playing:
-    curr_turn = make_a_turn(player1_sign, player2_sign, curr_turn)
-    check_for_win(player1_sign)
-    check_for_win(player2_sign)
-
+main()
