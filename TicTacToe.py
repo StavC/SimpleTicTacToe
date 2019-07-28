@@ -77,4 +77,5 @@ def main():
         check_for_win(player2_sign)
 
 
-main()
+if __name__ == '__main__':
+    main()
